@@ -14,4 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Lock(LockModeType.PESSIMISTIC_READ) //비관적인 읽기 락(누군가 수정하기 전 미리 처리하는 락)
     Optional<Post> findWithShareLockById(Long id);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    Optional<Post> findWithWriteLockById(Long id);
 }

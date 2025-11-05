@@ -28,4 +28,14 @@ public class PostController {
     public List<Post> findByUserName(@PathVariable("UserName") String userName) {
         return postService.findByUserName(userName);
     }
+
+    @GetMapping("/findWithWriteLockById/{id}")
+    public Post findWithWriteLockById(@PathVariable Long id) {
+        return postService.findWithWriteLockById(id).orElse(null);
+    }
+
+    @GetMapping("/modify/optimistic/{id}")
+    public Post modifyOptimistic(@PathVariable Long id) {
+        return postService.modifyOptimistic(id);
+    }
 }

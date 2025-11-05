@@ -3,12 +3,13 @@ package com.ll.jpa2511.domain.post;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Version;
+import lombok.*;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+@Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor
@@ -20,4 +21,6 @@ public class Post {
     private String userName;
     private String subject;
     private String content;
+    @Version
+    private Long version;
 }

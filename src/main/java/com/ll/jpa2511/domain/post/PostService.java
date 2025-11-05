@@ -3,6 +3,7 @@ package com.ll.jpa2511.domain.post;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +37,20 @@ public class PostService {
         Thread.sleep(10000); //예외 발생
 
         return postRepository.findWithShareLockById(id);
+    }
+
+    public Optional<Post> findWithWriteLockById(Long id) {
+        return postRepository.findWithWriteLockById(id);
+    }
+
+    @SneakyThrows
+    @Transactional
+    public Post modifyOptimistic(Long id) {
+        Post post =postRepository.findById(id).orElseThrow();
+
+        Thread.sleep(10000);
+
+        post.setUserName(post.getUserName()+ "!");
+        return post;
     }
 }
